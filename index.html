@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Rotator</title>
+    <title>Image Flasher</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -43,21 +43,19 @@
 
 <body>
     <div id="image-container">
-        <img class="image active" src="israel.png" alt="Image 1">
-        <img class="image" src="vile.jfif" alt="Image 2">
-        <img class="image" src="rbxgooner.png" alt="Image 3">
+        <img class="image active" src="vile.jfif" alt="Flashing Image">
     </div>
 
     <script>
-        let currentIndex = 0;
-        const images = document.querySelectorAll('.image');
-        const totalImages = images.length;
+        let isFlashing = true;  // Control the flashing effect
+        const image = document.querySelector('.image');  // Target the image
 
+        // Flash effect function
         setInterval(() => {
-            images[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % totalImages; // Loop back to the first image
-            images[currentIndex].classList.add('active');
-        }, 3000); // Change image every 3 seconds
+            if (isFlashing) {
+                image.classList.toggle('active'); // Toggle visibility
+            }
+        }, 500); // Change visibility every 500 milliseconds (0.5 seconds)
     </script>
 </body>
 
