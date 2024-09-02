@@ -4,41 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hi</title>
+    <title>Image Rotator</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #image-container {
+            position: relative;
+            width: 80%; /* Set a width for the image container */
+            max-width: 600px; /* Set a maximum width */
+            height: 400px; /* Set a height for the image container */
+            overflow: hidden;
+        }
+
+        .image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image.active {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>hi</h1>
-        <p>.</p>
-    </header>
+    <div id="image-container">
+        <img class="image active" src="image1.jpg" alt="Image 1">
+        <img class="image" src="image2.jpg" alt="Image 2">
+        <img class="image" src="image3.jpg" alt="Image 3">
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image');
+        const totalImages = images.length;
 
-    <main>
-        <section id="about">
-            <h2>hi</h2>
-            <p>Hello!</p>
-        </section>
-
-      
-
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Feel free to reach out via <a href="proudlarp@proton.me">email</a>!</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 tailz .</p>
-    </footer>
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % totalImages; // Loop back to the first image
+            images[currentIndex].classList.add('active');
+        }, 3000); // Change image every 3 seconds
+    </script>
 </body>
 
 </html>
