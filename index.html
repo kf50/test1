@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>&lt;3</title> <!-- Changed title to <3 -->
+    <title>&lt;3</title>
     <style>
         body {
             height: 100vh;
@@ -11,6 +11,30 @@
             overflow: hidden; /* Prevent scrolling */
             background-color: #000; /* Black background */
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Align elements vertically */
+        }
+
+        .profile-pic {
+            width: 150px; /* Size of the profile picture */
+            height: 150px; /* Size of the profile picture */
+            border-radius: 50%; /* Circular shape */
+            overflow: hidden; /* Ensure image fits in circle */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Glowing effect */
+            margin-bottom: 20px; /* Space between image and text */
+        }
+
+        .profile-pic img {
+            width: 100%; /* Responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .name {
+            font-size: 24px; /* Font size for the text */
+            color: white; /* Text color */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glowing text effect */
         }
 
         .star {
@@ -46,26 +70,31 @@
 </head>
 <body>
 
-<script>
-    document.addEventListener('mousemove', function(event) {
-        spawnStar(event.clientX, event.clientY);
-    });
+    <div class="profile-pic">
+        <img src="" alt="Profile Picture"> <!-- Replace with your image URL -->
+    </div>
+    <div class="name">tailz</div>
 
-    function spawnStar(x, y) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        document.body.appendChild(star);
+    <script>
+        document.addEventListener('mousemove', function(event) {
+            spawnStar(event.clientX, event.clientY);
+        });
 
-        // Set star's position
-        star.style.left = `${x}px`;
-        star.style.top = `${y}px`;
+        function spawnStar(x, y) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            document.body.appendChild(star);
 
-        // Remove star after some time to keep the DOM clean
-        setTimeout(() => {
-            star.remove();
-        }, 1000);  // Change 1000 to control how long each star stays on screen
-    }
-</script>
+            // Set star's position
+            star.style.left = `${x}px`;
+            star.style.top = `${y}px`;
+
+            // Remove star after some time to keep the DOM clean
+            setTimeout(() => {
+                star.remove();
+            }, 1000);  // Change 1000 to control how long each star stays on screen
+        }
+    </script>
 
 </body>
 </html>
