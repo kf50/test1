@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mouse Star Spawner</title>
+    <title>&lt;3</title> <!-- Changed title to <3 -->
     <style>
         body {
             height: 100vh;
@@ -15,16 +15,31 @@
 
         .star {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: white; /* Change stars to white */
-            border-radius: 50%; /* Makes the star circular */
-            pointer-events: none; /* Allows clicks to pass through the stars */
+            width: 0; 
+            height: 0; 
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid white; /* Color of the star */
+            transform: rotate(35deg);
+            opacity: 0.8; /* Slightly less opacity to create a twinkle effect */
             animation: twinkle 1s infinite; /* Add a twinkling effect */
         }
 
+        .star:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 4px;
+            width: 0; 
+            height: 0; 
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid white; /* Color of the star */
+            transform: rotate(-70deg);
+        }
+
         @keyframes twinkle {
-            0%, 100% { opacity: 1; }
+            0%, 100% { opacity: 0.8; }
             50% { opacity: 0.5; }
         }
     </style>
