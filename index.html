@@ -1,62 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Flasher</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mouse Star Spawner</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             height: 100vh;
-        }
-
-        #image-container {
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling */
+            background-color: #000; /* Black background */
             position: relative;
-            width: 80%; /* Set a width for the image container */
-            max-width: 600px; /* Set a maximum width */
-            height: 400px; /* Set a height for the image container */
-            overflow: hidden;
         }
 
-        .image {
+        .star {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+            width: 8px;
+            height: 8px;
+            background-color: white; /* Change stars to white */
+            border-radius: 50%; /* Makes the star circular */
+            pointer-events: none; /* Allows clicks to pass through the stars */
+            animation: twinkle 1s infinite; /* Add a twinkling effect */
         }
 
-        .image.active {
-            opacity: 1;
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
-
 <body>
-    <div id="image-container">
-        <img class="image active" src="vile.jfif" alt="Flashing Image">
-    </div>
 
-    <script>
-        let isFlashing = true;  // Control the flashing effect
-        const image = document.querySelector('.image');  // Target the image
+<script>
+    document.addEventListener('mousemove', function(event) {
+        spawnStar(event.clientX, event.clientY);
+    });
 
-        // Flash effect function
-        setInterval(() => {
-            if (isFlashing) {
-                image.classList.toggle('active'); // Toggle visibility
-            }
-        }, 500); // Change visibility every 500 milliseconds (0.5 seconds)
-    </script>
+    function spawnStar(x, y) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        document.body.appendChild(star);
+
+        // Set star's position
+        star.style.left = `${x}px`;
+        star.style.top = `${y}px`;
+
+        // Remove star after some time to keep the DOM clean
+        setTimeout(() => {
+            star.remove();
+        }, 1000);  // Change 1000 to control how long each star stays on screen
+    }
+</script>
+
 </body>
-
 </html>
