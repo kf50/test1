@@ -35,6 +35,26 @@
             font-size: 24px; /* Font size for the text */
             color: white; /* Text color */
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glowing text effect */
+            margin-bottom: 20px; /* Space below the name */
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column; /* Stack links vertically */
+            align-items: center; /* Center the links */
+        }
+
+        .link {
+            color: white; /* Link color */
+            text-decoration: none; /* Remove underlines */
+            font-size: 18px; /* Font size for links */
+            margin: 5px 0; /* Space between links */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Glowing effect */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        .link:hover {
+            color: #00ff00; /* Change color on hover */
         }
 
         .star {
@@ -74,6 +94,12 @@
         <img src="vile.jfif" alt="Profile Picture"> <!-- Replace with your image URL -->
     </div>
     <div class="name">tailz</div>
+
+    <div class="links">
+        <a class="link" href="https://www.youtube.com/@swattinglarps" target="_blank">1 - YouTube</a>
+        <a class="link" href="#" target="_blank">2 - Test</a>
+        <a class="link" href="#" target="_blank">3 - Test</a>
+    </div>
 
     <script>
         document.addEventListener('mousemove', function(event) {
