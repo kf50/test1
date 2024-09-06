@@ -3,59 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HWDP</title>
+    <title>Background Music and Images</title>
     <style>
-        body, html {
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: black;
-            position: relative;
+            background-color: #f0f0f0;
         }
-
-        video {
-            max-width: 100%;
-            max-height: 100%;
-            margin-top: 20px; /* Space between names and video */
-        }
-
-        .overlay {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 24px;
-            text-align: center;
-            padding: 10px; /* Padding around the names */
-        }
-
-        .name {
-            margin: 5px 10px; /* Margin between names */
+        img {
+            width: 60%;
+            height: auto;
+            border: 2px solid #000;
         }
     </style>
 </head>
 <body>
-    <div class="overlay">
-        <div class="name">lilangevil1003</div>
-        <div class="name">thxel0 (svvn)</div>
-        <div class="name">PSXBunlith</div>
-        <div class="name">NihilistGf</div>
-        <div class="name">LeadPipeImages</div>
-        <div class="name">JamesRehwald</div>
-        <div class="name">kelvin francis</div>
-        <div class="name">TransLillith</div>
-        <div class="name">Mizu</div>
-    </div>
-    
-    <video controls autoplay loop>
-        <source src="🎥Ray Rilla-23 Dead Opps.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+
+    <img id="image" src="image1.jpg" alt="Image">
+
+    <audio id="backgroundAudio" loop>
+        <source src="your-audio-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+        const images = [
+            'image1.jpg',
+            'image2.jpg',
+            'image3.jpg',
+            'image4.jpg',
+            'image5.jpg',
+            'image6.jpg',
+            'image7.jpg',
+            'image8.jpg',
+            'image9.jpg',
+            'image10.jpg'
+        ];
+
+        let currentIndex = 0;
+        const imageElement = document.getElementById('image');
+        const audioElement = document.getElementById('backgroundAudio');
+
+        // Start audio when the page loads
+        window.onload = () => {
+            audioElement.play();
+            cycleImages();
+        };
+
+        function cycleImages() {
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                imageElement.src = images[currentIndex];
+            }, 2000); // Change image every 2 seconds
+        }
+    </script>
+
 </body>
 </html>
