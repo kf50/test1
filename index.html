@@ -3,64 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HWDP</title>
+    <title>extorting bitches, making riches... <3 </title>
     <style>
         body {
+            background-color: black;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            color: white;
+            font-family: Arial, sans-serif;
         }
-        img {
-            width: 60%;
+        .circle-img {
+            width: 150px; /* Set the desired width */
+            height: 150px; /* Set the desired height */
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid white; /* Optional: adds a border */
+        }
+        .circle-img img {
+            width: 100%;
             height: auto;
-            border: 2px solid #000;
+        }
+        .text {
+            margin-top: 10px; /* Space between image and text */
+            font-size: 24px; /* Adjust font size if needed */
         }
     </style>
 </head>
 <body>
-
-    <img id="image" src="image-1.jpg" alt="Image">
-
-    <audio id="backgroundAudio" loop>
-        <source src="🎥Ray Rilla-23 Dead Opps.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
-
-    <script>
-        const images = [
-            'SPOILER_Screenshot_20240628-235144.png',
-            'SPOILER_20240627_013947.jpg',
-            'IMG_6512.jpg',
-            'IMG_20240831_165324.jpg',
-            '
-IMG_20240611_190617_543.jpg',
-            '20240503_114104.jpg',
-            'image-2.jpg',
-            'SPOILER_remix-292dc3e8-95c7-4426-a582-9ce7ba1c7411.png',
-            'remix-7504690f-ab02-4f5d-a9b2-5d6e52343417.png',
-            'rn_image_picker_lib_temp_1d879912-b034-49ea-88d7-cd5e524b302a.jpg'
-        ];
-
-        let currentIndex = 0;
-        const imageElement = document.getElementById('image');
-        const audioElement = document.getElementById('backgroundAudio');
-
-        // Start audio when the page loads
-        window.onload = () => {
-            audioElement.play();
-            cycleImages();
-        };
-
-        function cycleImages() {
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % images.length;
-                imageElement.src = images[currentIndex];
-            }, 2000); // Change image every 2 seconds
-        }
-    </script>
-
+    <div class="circle-img">
+        <img src="vile.jfif" alt="Profile Picture">
+    </div>
+    <div class="text">tailz</div>
 </body>
 </html>
