@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>extorting bitches, making riches... <3 </title>
+    <title>extorting bitches, making riches... <3</title>
     <style>
         body {
             background-color: black;
@@ -35,27 +35,6 @@
                          0 0 10px rgba(255, 255, 255, 0.6),
                          0 0 15px rgba(255, 0, 0, 0.5); 
         }
-
-        .heart {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: red;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            opacity: 1;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-30px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -64,21 +43,21 @@
     </div>
     <div class="text">tailz</div>
 
-    <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-            heart.style.animationDuration = Math.random() * 4 + 4 + 's'; // Random duration between 4s and 8s
-            
-            document.body.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove(); // Remove heart after animation
-            }, parseFloat(heart.style.animationDuration) * 1000); // Duration must match the animation duration
-        }
+    <!-- Add an audio element to play the song -->
+    <audio id="background-audio" loop autoplay>
+        <source src="your-audio-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
 
-        setInterval(createHeart, 500); // Create a new heart every 500ms
+    <script>
+        // Automatically play the audio when the page loads
+        window.onload = function() {
+            const audio = document.getElementById('background-audio');
+            audio.volume = 1; // Set volume to max
+            audio.play().catch(function(error) {
+                console.log('Audio play failed:', error);
+            });
+        };
     </script>
 </body>
 </html>
