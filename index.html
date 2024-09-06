@@ -44,20 +44,29 @@
     <div class="text">tailz</div>
 
     <!-- Add an audio element to play the song -->
-    <audio id="background-audio" loop autoplay>
+    <audio id="background-audio" loop>
         <source src="swatted.mp3" type="audio/mpeg">
         Your browser does not support the audio tag.
     </audio>
 
     <script>
-        // Automatically play the audio when the page loads
-        window.onload = function() {
+        // Function to play audio
+        function playAudio() {
             const audio = document.getElementById('background-audio');
             audio.volume = 1; // Set volume to max
             audio.play().catch(function(error) {
                 console.log('Audio play failed:', error);
             });
-        };
+        }
+
+        // Add event listener for keydown
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                playAudio();
+                // Remove the event listener after playing the audio once
+                window.removeEventListener('keydown', arguments.callee);
+            }
+        });
     </script>
 </body>
 </html>
