@@ -20,20 +20,20 @@
         .circle-img {
             width: 150px; 
             height: 150px; 
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid white;
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 3px solid white; 
         }
         .circle-img img {
             width: 100%;
-            height: auto;
+            height: auto; 
         }
         .text {
             margin-top: 10px; 
             font-size: 24px; 
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
                          0 0 10px rgba(255, 255, 255, 0.6),
-                         0 0 15px rgba(255, 0, 0, 0.5);
+                         0 0 15px rgba(255, 0, 0, 0.5); 
         }
 
         .heart {
@@ -42,7 +42,8 @@
             height: 30px;
             background: red;
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            animation: fall 10s infinite;
+            opacity: 1;
+            animation: fall linear forwards;
         }
 
         @keyframes fall {
@@ -68,10 +69,13 @@
             const heart = document.createElement('div');
             heart.className = 'heart';
             heart.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+            heart.style.animationDuration = Math.random() * 4 + 4 + 's'; // Random duration between 4s and 8s
+            
             document.body.appendChild(heart);
+            
             setTimeout(() => {
                 heart.remove(); // Remove heart after animation
-            }, 10000); // Duration must match the animation duration
+            }, parseFloat(heart.style.animationDuration) * 1000); // Duration must match the animation duration
         }
 
         setInterval(createHeart, 500); // Create a new heart every 500ms
