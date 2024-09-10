@@ -8,6 +8,7 @@
         body {
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -22,7 +23,7 @@
             height: 150px;
             border-radius: 50%;
             overflow: hidden;
-            border: 5px black;
+            border: 5px solid white;
             background-color: black;
             position: relative;
         }
@@ -34,26 +35,51 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        #enter-button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #enter-button:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body onkeydown="checkEnter(event)">
-    <div id="initial-message">Press Enter</div>
+    <div id="initial-message">Press Enter or Tap the Button</div>
     <div id="circle-pfp">
         <img src="SIMKI.jpg" alt="Profile Picture">
     </div>
+    <button id="enter-button" onclick="enterSite()">Enter</button>
     <audio id="background-audio" loop>
         <source src="ATR Anthem.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
+        window.onload = function() {
+            // Display the button on mobile
+            document.getElementById('enter-button').style.display = 'block';
+        };
+
         function checkEnter(event) {
             if (event.key === 'Enter') {
-                document.body.style.backgroundColor = 'black';
-                document.getElementById('initial-message').style.display = 'none';
-                document.getElementById('circle-pfp').style.display = 'flex';
-                document.getElementById('background-audio').play();
+                enterSite();
             }
+        }
+
+        function enterSite() {
+            document.body.style.backgroundColor = 'black';
+            document.getElementById('initial-message').style.display = 'none';
+            document.getElementById('circle-pfp').style.display = 'flex';
+            document.getElementById('background-audio').play();
         }
     </script>
 </body>
