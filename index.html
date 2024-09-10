@@ -3,70 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>extorting bitches, making riches... <3</title>
+    <title>>.<</title>
     <style>
         body {
-            background-color: black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
             color: white;
-            font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent scrollbars from appearing */
+            font-size: 2em;
+            transition: background 0.5s;
         }
-        .circle-img {
-            width: 150px; 
-            height: 150px; 
-            border-radius: 50%; 
-            overflow: hidden; 
-            border: 3px solid white; 
+        #circle-pfp {
+            display: none;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            background-color: black;
+            position: relative;
         }
-        .circle-img img {
+        #circle-pfp img {
             width: 100%;
-            height: auto; 
-        }
-        .text {
-            margin-top: 10px; 
-            font-size: 24px; 
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
-                         0 0 10px rgba(255, 255, 255, 0.6),
-                         0 0 15px rgba(255, 0, 0, 0.5); 
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
-<body>
-    <div class="circle-img">
-        <img src="vile.jfif" alt="Profile Picture">
+<body onkeydown="checkEnter(event)">
+    <div id="initial-message">Press Enter</div>
+    <div id="circle-pfp">
+        <img src="israel.png" alt="Profile Picture">
     </div>
-    <div class="text">tailz</div>
-
-    <!-- Add an audio element to play the song -->
     <audio id="background-audio" loop>
-        <source src="swatted.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
+        <source src="ATR Anthem.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Function to play audio
-        function playAudio() {
-            const audio = document.getElementById('background-audio');
-            audio.volume = 1; // Set volume to max
-            audio.play().catch(function(error) {
-                console.log('Audio play failed:', error);
-            });
-        }
-
-        // Add event listener for keydown
-        window.addEventListener('keydown', function(event) {
+        function checkEnter(event) {
             if (event.key === 'Enter') {
-                playAudio();
-                // Remove the event listener after playing the audio once
-                window.removeEventListener('keydown', arguments.callee);
+                document.body.style.backgroundColor = 'black';
+                document.getElementById('initial-message').style.display = 'none';
+                document.getElementById('circle-pfp').style.display = 'flex';
+                document.getElementById('background-audio').play();
             }
-        });
+        }
     </script>
 </body>
 </html>
