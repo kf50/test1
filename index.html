@@ -36,8 +36,8 @@
         }
     </style>
 </head>
-<body onkeydown="checkEnter(event)">
-    <div id="initial-message">Press Enter</div>
+<body>
+    <div id="initial-message" onclick="enterSite()">Press Enter or Tap Here</div>
     <div id="circle-pfp">
         <img src="SIMKI.jpg" alt="Profile Picture">
     </div>
@@ -47,13 +47,11 @@
     </audio>
 
     <script>
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                document.body.style.backgroundColor = 'black';
-                document.getElementById('initial-message').style.display = 'none';
-                document.getElementById('circle-pfp').style.display = 'flex';
-                document.getElementById('background-audio').play();
-            }
+        function enterSite() {
+            document.body.style.backgroundColor = 'black';
+            document.getElementById('initial-message').style.display = 'none';
+            document.getElementById('circle-pfp').style.display = 'flex';
+            document.getElementById('background-audio').play();
         }
     </script>
 </body>
