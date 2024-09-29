@@ -25,21 +25,22 @@
             border: 5px solid black;
             background-color: black;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            text-shadow: 0 0 20px white; /* Glowing effect */
         }
-        #circle-pfp img {
-            width: 100%;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        #circle-pfp span {
+            color: white;
+            font-size: 1.5em; /* Adjust font size as needed */
         }
     </style>
 </head>
 <body>
-    <div id="initial-message" onclick="enterSite()">Click me :3</div>
+    <div id="initial-message" onclick="enterSite()">...</div>
     <div id="circle-pfp">
-        <img src="SIMKI.jpg" alt="Profile Picture">
+        <span>lets do something illegal together...</span>
     </div>
     <audio id="background-audio" loop>
         <source src="ATR Anthem.mp3" type="audio/mpeg">
@@ -56,3 +57,4 @@
     </script>
 </body>
 </html>
+
