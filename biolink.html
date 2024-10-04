@@ -97,7 +97,7 @@
             <a href="mailto:lol@interpol.int.pl" class="icon">mail</a>
         </div>
     </div>
-    <audio id="background-music" src="swatted.mp3" preload="auto"></audio> <!-- Add your audio file here -->
+    <audio id="background-music" src="swatted.mp3" preload="auto"></audio>
     <script>
         const starsContainer = document.querySelector('.stars');
         const overlay = document.querySelector('.overlay');
@@ -107,7 +107,11 @@
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none'; // Hide overlay
             container.style.display = 'block'; // Show main content
-            audio.play(); // Play the audio
+
+            // Attempt to play the audio and handle errors
+            audio.play().catch((error) => {
+                console.error('Playback failed:', error);
+            });
         });
 
         function createStar(x, y) {
