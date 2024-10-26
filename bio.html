@@ -39,6 +39,14 @@
             z-index: 1; /* Ensure the container is above stars */
             display: none; /* Initially hidden */
         }
+        .lyrics {
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+            margin: 15px 0;
+            font-size: 18px; /* Adjust size as needed */
+            max-width: 300px; /* Limit width for better readability */
+            line-height: 1.4; /* Improve spacing between lines */
+        }
         .profile-picture {
             width: 150px;
             height: 150px;
@@ -91,6 +99,7 @@
     <div class="overlay">Click to Enter</div>
     <div class="stars"></div>
     <div class="container">
+        <div class="lyrics">Here are the song lyrics...</div> <!-- Place actual lyrics here -->
         <div class="profile-picture"></div>
         <h1 class="name">Tailz</h1>
         <div class="icons">
