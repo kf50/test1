@@ -39,13 +39,11 @@
             z-index: 1; /* Ensure the container is above stars */
             display: none; /* Initially hidden */
         }
-        .lyrics {
+        .custom-text {
             color: white;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
             margin: 15px 0;
             font-size: 18px; /* Adjust size as needed */
-            max-width: 300px; /* Limit width for better readability */
-            line-height: 1.4; /* Improve spacing between lines */
         }
         .profile-picture {
             width: 150px;
@@ -99,7 +97,7 @@
     <div class="overlay">Click to Enter</div>
     <div class="stars"></div>
     <div class="container">
-        <div class="lyrics"></div> <!-- This will be updated -->
+        <div class="custom-text">extorting.online/swat | swats.shop</div> <!-- Replace with your text -->
         <div class="profile-picture"></div>
         <h1 class="name">Tailz</h1>
         <div class="icons">
@@ -112,79 +110,6 @@
         const overlay = document.querySelector('.overlay');
         const container = document.querySelector('.container');
         const audio = document.getElementById('background-music');
-        const lyricsElement = document.querySelector('.lyrics');
-
-        // Input lyrics directly as a space-separated string
-        const lyrics = `
-[Intro]
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-
-[Chorus]
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-
-[Zwrotka 1]
-Wychodzę kurwa se do sklepu, widzę kurwa jakąś suke
-O chuj kurwa chodzi, ja pierdole, suka pod klatką
-O co chodzi kurwa, jebie się z twoja matką
-Kurwa, ja pierdole
-Najebałem się, najarałem się
-Ty wyglądasz jak cwel, jebać policje
-
-[Refren]
-Zasady trzymamy się, jebać policje
-Znowu najebiemy się, kurwo Mafia Gang
-Pały ciągle gonią nas bo jaramy jazz
-Spierdalamy, cwele nigdy nie dogonią nas
-Zasady trzymamy się, jebać policje
-Znowu najebiemy się, kurwo Mafia Gang
-Pały ciągle gonią nas bo jaramy jazz
-Spierdalamy, cwele nigdy nie dogonią nas
-See upcoming rap shows
-Get tickets for your favorite artists
-You might also like
-HaWuDePe 2
-Mafia Gang
-NIEBIESKIE ŚWIATŁO
-Mafia Gang
-Jot Pe (NANANA)
-Mafia Gang
-[Zwrotka 2]
-Rozjebałeś się, pierdole policje
-HaWuDePe, jebać cie kurwo psie
-HaWuDePe, rozjebałeś się
-Jebać kurwy psy, temat palimy
-Pierdolimy policje, na ścianie mam HaWuDePe
-Jebać policje
-
-[Refren]
-Zasady trzymamy się, jebać policje
-Znowu najebiemy się, kurwo Mafia Gang
-Pały ciągle gonią nas bo jaramy jazz
-Spierdalamy, cwele nigdy nie dogonią nas
-Zasady trzymamy się, jebać policje
-Znowu najebiemy się, kurwo Mafia Gang
-Pały ciągle gonią nas bo jaramy jazz
-Spierdalamy, cwele nigdy nie dogonią nas
-
-[Bridge]
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-
-[Chorus]
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-Jebać policje, jebać, jebać policje
-        `.trim().split(/\s{2,}/); // Split by two or more spaces to create an array
-
-        let currentLyricIndex = 0;
-        let lyricInterval;
 
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none'; // Hide overlay
@@ -194,16 +119,6 @@ Jebać policje, jebać, jebać policje
             audio.play().catch((error) => {
                 console.error('Playback failed:', error);
             });
-
-            // Start displaying lyrics
-            lyricInterval = setInterval(() => {
-                if (currentLyricIndex < lyrics.length) {
-                    lyricsElement.textContent = lyrics[currentLyricIndex];
-                    currentLyricIndex++;
-                } else {
-                    clearInterval(lyricInterval); // Stop when all lyrics are displayed
-                }
-            }, 1000); // Change lyric every second
         });
 
         function createStar(x, y) {
