@@ -18,15 +18,13 @@
             overflow: hidden;
         }
         video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            position: fixed; /* Change to fixed to ensure it covers the viewport */
+            top: 0;
+            left: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            object-fit: cover; /* Maintain aspect ratio while covering the area */
             z-index: -1;
-            transform: translate(-50%, -50%);
         }
         .container {
             z-index: 1;
