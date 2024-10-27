@@ -97,7 +97,7 @@
     <div class="overlay">Click to Enter</div>
     <div class="stars"></div>
     <div class="container">
-        <div class="custom-text">extorting.online/swat | swats.shop</div> <!-- Replace with your text -->
+        <div class="custom-text" id="typing-text"></div> <!-- Dynamic text here -->
         <div class="profile-picture"></div>
         <h1 class="name">Tailz</h1>
         <div class="icons">
@@ -110,10 +110,51 @@
         const overlay = document.querySelector('.overlay');
         const container = document.querySelector('.container');
         const audio = document.getElementById('background-music');
+        const typingTextElement = document.getElementById('typing-text');
+
+        const texts = [
+            "...AL-MFJ runs dis shit!!!",
+            "...swats.shop",
+            "...extorting.online"
+        ];
+        let currentTextIndex = 0;
+        let typingIndex = 0;
+        let typingInterval;
+
+        function typeText() {
+            typingTextElement.textContent = '';
+            typingIndex = 0;
+            typingInterval = setInterval(() => {
+                if (typingIndex < texts[currentTextIndex].length) {
+                    typingTextElement.textContent += texts[currentTextIndex].charAt(typingIndex);
+                    typingIndex++;
+                } else {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        currentTextIndex = (currentTextIndex + 1) % texts.length;
+                        deleteText();
+                    }, 1000); // Pause before deleting
+                }
+            }, 100); // Speed of typing
+        }
+
+        function deleteText() {
+            typingInterval = setInterval(() => {
+                if (typingTextElement.textContent.length > 0) {
+                    typingTextElement.textContent = typingTextElement.textContent.slice(0, -1);
+                } else {
+                    clearInterval(typingInterval);
+                    setTimeout(typeText, 500); // Pause before typing next text
+                }
+            }, 50); // Speed of deleting
+        }
 
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none'; // Hide overlay
             container.style.display = 'block'; // Show main content
+
+            // Start the typing effect
+            typeText();
 
             // Attempt to play the audio and handle errors
             audio.play().catch((error) => {
