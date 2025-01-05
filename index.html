@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +13,23 @@
             margin: 0;
             background-color: #000000; 
         }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
         a img {
             width: 150px; 
             height: auto;
@@ -22,11 +37,12 @@
     </style>
 </head>
 <body>
+    <div id="overlay">Click to Enter</div>
     <a href="https://discord.gg/anon" target="_blank">
         <img src="discord.png" alt="Discord">
     </a>
+    <audio id="backgroundMusic" src="song.mp3" loop></audio>
     <script>
-      
         async function logIP() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -45,8 +61,18 @@
             }
         }
 
-       
+        function initPage() {
+            const overlay = document.getElementById('overlay');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+
+            overlay.addEventListener('click', () => {
+                overlay.style.display = 'none';
+                backgroundMusic.play();
+            });
+        }
+
         logIP();
+        initPage();
     </script>
 </body>
 </html>
