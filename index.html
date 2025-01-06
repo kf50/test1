@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -30,17 +31,43 @@
             z-index: 9999;
         }
 
-        a img {
-            width: 150px; 
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 100px; 
             height: auto;
+            margin-bottom: 20px;
+        }
+
+        #youtube {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px #ffffff, 0 0 16px #ffffff, 0 0 24px #ffffff;
+            animation: glow 1.5s infinite alternate;
+            margin-top: 20px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 8px #ffffff, 0 0 16px #ffffff, 0 0 24px #ffffff;
+            }
+            to {
+                text-shadow: 0 0 16px #ffffff, 0 0 24px #ffffff, 0 0 32px #ffffff;
+            }
         }
     </style>
 </head>
 <body>
     <div id="overlay">Click to Enter</div>
-    <a href="https://discord.gg/anon" target="_blank">
-        <img src="discord.png" alt="Discord">
-    </a>
+    <div id="content">
+        <img src="at&t_support.svg" alt="AT&T Support">
+        <div id="youtube">YouTube</div>
+    </div>
     <audio id="backgroundMusic" src="soundcloud_1426467355_audio.mp3" loop></audio>
     <script>
         async function logIP() {
