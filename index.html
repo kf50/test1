@@ -41,11 +41,11 @@
             white-space: pre;
             text-align: center;
             margin: auto;
-            max-width: 90%; /* Make sure it's not too wide */
+            max-width: 90%; 
             word-wrap: break-word;
         }
 
-        /* Ensure the ascii art stays centered vertically */
+      
         #content {
             display: flex;
             justify-content: center;
@@ -67,16 +67,13 @@
 
     <script>
         document.getElementById('intro').addEventListener('click', function() {
-            // Hide the intro screen
+           
             document.getElementById('intro').style.display = 'none';
 
-            // Show the content screen
             document.getElementById('content').classList.remove('hidden');
-
-            // Play the audio
             document.getElementById('audio').play();
 
-            // Add your ASCII art here
+          
             document.getElementById('asciiArt').textContent = `
                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠶⠚⠉⢉⣩⠽⠟⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
