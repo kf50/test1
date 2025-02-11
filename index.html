@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:P</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .content {
+            display: block;
+            font-size: 1.2em; 
+            cursor: pointer;
+            z-index: 10; /* Ensure the text is above the stars */
+        }
+        .hidden-content {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        audio {
+            display: none;
+        }
+
+        /* Falling stars effect */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: fall 3s infinite linear;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10px;
+                left: calc(100% * var(--random-x));
+                opacity: 0.8;
+            }
+            100% {
+                top: 100vh;
+                left: calc(100% * var(--random-x));
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content" id="enterText">Click to Enter</div>
+
+    <div class="hidden-content" id="hiddenContent">
+        <img src="vile.gif" alt="gif">
+        <audio autoplay loop volume="0.8">
+            <source src="wifi.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <script>
+        document.getElementById('enterText').addEventListener('click', function() {
+            document.getElementById('enterText').style.display = 'none';
+            document.getElementById('hiddenContent').style.display = 'block';
+        });
+
+        // Create falling stars
+        function createStars(numStars) {
+            for (let i = 0; i < numStars; i++) {
+                let star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Randomize position and animation speed
+                const randomX = Math.random(); // Random horizontal position
+                const randomDelay = Math.random() * 2; // Random delay to make it less uniform
+                const randomDuration = Math.random() * 2 + 3; // Random duration for the fall effect
+
+                // Apply CSS variables to randomize positions
+                star.style.setProperty('--random-x', randomX);
+                star.style.animationDuration = `${randomDuration}s`;
+                star.style.animationDelay = `${randomDelay}s`;
+
+                document.body.appendChild(star);
+            }
+        }
+
+        // Start the falling stars effect
+        createStars(50); // Create 50 stars at the beginning
+
+        // Typing effect for the document title
+        const titles = [":P", ">_<", "^_^", ">////<", "???", "hi!","fuck you observia","RCS"];
+        let currentTitleIndex = 0;
+        let currentCharIndex = 0;
+        let currentTitle = titles[currentTitleIndex];
+        let typingInterval;
+
+        function typeTitle() {
+            if (currentCharIndex < currentTitle.length) {
+                document.title = currentTitle.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+            } else {
+                clearInterval(typingInterval);
+                setTimeout(() => {
+                    currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+                    currentTitle = titles[currentTitleIndex];
+                    currentCharIndex = 0;
+                    typingInterval = setInterval(typeTitle, 150);
+                }, 1000);
+            }
+        }
+
+        typingInterval = setInterval(typeTitle, 150);
+    </script>
+
+</body>
+</html>
 
