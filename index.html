@@ -23,7 +23,7 @@
             display: block;
             font-size: 1.2em; 
             cursor: pointer;
-            z-index: 10; /* Ensure the text is above the stars */
+            z-index: 10; 
         }
         .hidden-content {
             display: none;
@@ -45,7 +45,7 @@
             display: none;
         }
 
-        /* Falling stars effect */
+      
         .star {
             position: absolute;
             width: 3px;
@@ -87,18 +87,18 @@
             document.getElementById('hiddenContent').style.display = 'block';
         });
 
-        // Create falling stars
+      
         function createStars(numStars) {
             for (let i = 0; i < numStars; i++) {
                 let star = document.createElement('div');
                 star.classList.add('star');
                 
-                // Randomize position and animation speed
-                const randomX = Math.random(); // Random horizontal position
-                const randomDelay = Math.random() * 2; // Random delay to make it less uniform
-                const randomDuration = Math.random() * 2 + 3; // Random duration for the fall effect
+               
+                const randomX = Math.random(); 
+                const randomDelay = Math.random() * 2;
+                const randomDuration = Math.random() * 2 + 3; 
 
-                // Apply CSS variables to randomize positions
+               
                 star.style.setProperty('--random-x', randomX);
                 star.style.animationDuration = `${randomDuration}s`;
                 star.style.animationDelay = `${randomDelay}s`;
@@ -107,10 +107,10 @@
             }
         }
 
-        // Start the falling stars effect
-        createStars(50); // Create 50 stars at the beginning
+        
+        createStars(50); 
 
-        // Typing effect for the document title
+ 
         const titles = [":P", ">_<", "^_^", ">////<", "???", "hi!","fuck you observia","RCS", "yo amiginal stop telling kids you wanna fuck them", "(˶˃ ᵕ ˂˶) .ᐟ.ᐟ", "✩", "≽ܫ≼" , "twitter.com/ksbf" , "doxbin.com/user/coolguy512"];
         let currentTitleIndex = 0;
         let currentCharIndex = 0;
